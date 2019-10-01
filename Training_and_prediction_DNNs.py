@@ -23,7 +23,7 @@ from keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D, Activatio
 ###############################################################################################################
 ###############################################################################################################
 ###############################################################################################################
-################## TRAINING OF THE DNNs ON THE VENOMOUS SNAKES IMAGES 
+################## TRAINING OF THE DNNs ON VENOMOUS SNAKES IMAGES 
 
 
 ### Definition of the path for the venomous snakes images
@@ -173,7 +173,7 @@ df1.to_csv('/home/data/Resultat_de_solan_avec_poubelle/history_xception_NADAM_.c
 
 
 ###################################################################################
-#averaged network creation
+###### averaged network 
 ensembled_models = [xception1,xception2,xception3]
 
 def ensemble(models,model_input):
@@ -185,7 +185,7 @@ def ensemble(models,model_input):
 
 ensemble_model = ensemble(ensembled_models,model_input)
 
-####### Back up
+# Back up
 ensemble_model.save('/home/data/Resultat_de_solan_avec_poubelle/ensemble_xception__model')
 
 # compilation of the ensemble network
@@ -225,12 +225,12 @@ generator2 = datagen.flow_from_directory(
 def top3(y_true, y_pred):
     return metrics.top_k_categorical_accuracy(y_true, y_pred, k=3) 
 
-###############   PREDICTION for the non venomous snakes images
+###############   PREDICTION
 features_2 = ensemble_model.predict_generator(generator2, steps=nb_test_samples, workers=1)
 
 
 
-########### Back up of the predictions######################
+########### Back up of the predictions ######################
 
 df3 = pd.DataFrame(features_2)
 
