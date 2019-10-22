@@ -55,7 +55,7 @@ sympatrie<-sympatrie[,-1]
 ############################################################################################################################
 
 # WEIGHTING the resemblance matrix with the sympatry matrix
-mat_pred_symp<-prediction*sympatrie  #ou juste NA
+mat_pred_symp<-prediction*sympatrie  
 
 
 ####### Creation of the null distribution by randomly permutation the venomous species (columns) in the sympatry matrix
@@ -69,11 +69,11 @@ for(i in 1:50000){
   colnames(scores_rand)[i+1]<-'score'}
 
 
-####### obtention of the "true" total score (i.e. the sum of the weighted resemblance scores for each non-venomous species)
+####### obtention of the total score (i.e. the sum of the weighted resemblance scores for each non-venomous species)
 score_ok<-cbind(names,apply(mat_pred_symp,1,sum)) ; colnames(score_ok)=c('names','scores')
 
 
-#### testing of the "true" total scores against the null distribution
+#### testing the total scores against the null distribution
 test<-c()
 data_c<-c()
 visu<-data.frame(score=1:27,quantile_95=0)
@@ -92,14 +92,4 @@ for(i in 1:nrow(scores_rand)){
 #Fisher's method
 score=-2*sum(log(test))
 1-pchisq(score,54)
-
-
-### plot
-cor=as.numeric(quantile(scores_rand[(which(score_ok$names=="Coronella austriaca")),2:50001], 0.95))
-
-df<-as.data.frame(as.numeric(scores_rand[which(score_ok$names=="Coronella austriaca"),2:50001])) ; colnames(df)<-"scores_rand"
-ggplot(df, aes(x=scores_rand))+ 
-  geom_histogram(color="black", fill="cornflowerblue")+
-  geom_vline(aes(xintercept=as.numeric(score_ok[which(score_ok$names=="Coronella austriaca"),2])), color="red", linetype="solid", size=2)+  
-  geom_vline(aes(xintercept=cor),linetype="longdash", size=2)
 
