@@ -15,9 +15,9 @@ Prediction_background_exchanged_images.py
 Test_invariance_background_exchange.R
 
 ## Data location
-Are available on HAL [here](Http:....)
+Are available are available on Dryad [here](Http:....)
   - the prediction made by the 15 averaged DNNs for the non-venomous snakes species
   - the matrix of sympatry between venomous and non-venomous species
   - the prediction made by the 15 averaged DNNs for the images with a background exchanged
 
-Snakes images used for training and testing are protected by copyright and are not available.
+Snakes images used for training and testing are protected by copyright and can be provided upon request.
